@@ -19,6 +19,18 @@ int main()  //Use main method to test or initiate other methods, do not write an
 
 void InitConsoleApp(std::string FileName)   //Starts the console application. ()[]
 {
+    struct Player
+    {
+        std::string Name;
+        int LivesLost = 0;
+        bool Eliminated = false;
+    };
+    Player NewPlayer;
+
+    int MaxLives = 10;
+    int PlayerNum;
+    std::vector<Player> PlayerList;
+
     std::cout << "****** NEVER HAVE I EVER v0.1 by RustySoul ******" << std::endl;
     std::cout << std::endl;
 
@@ -29,14 +41,17 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
     
         std::cout << "Please select an option using 0-9 on the keyboard:" << std::endl;
 
-        std::cout << "1. Get random question" << std::endl;
+        std::cout << "1. Get Random Question" << std::endl;
+        std::cout << "2. Set Lives" << std::endl;
+        std::cout << "3. Add Player" << std::endl;
+        std::cout << "4. Player List" << std::endl;
         std::cout << "0. Exit Game" << std::endl;
 
-        int Input;
-        std::cin >> Input;
+        int Input0;
+        std::cin >> Input0;
         std::cout << std::endl;
 
-        switch (Input)
+        switch (Input0)
         {
         case 0:
             Exit = true;
@@ -44,9 +59,59 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
 
         case 1:
             std::cout << RandomStringFromVector(QuestionList) << std::endl;
+            PlayerNum = 0;
+            for (Player CurrentPlayer : PlayerList)
+            {
+                std::cout << std::endl;
+                if (MaxLives > CurrentPlayer.LivesLost)
+                {
+                    std::cout << "Did " << CurrentPlayer.Name << " lose a life? (y/n): ";
+                    char Input1;
+                    std::cin >> Input1;
+                    if (Input1 == 'y')
+                    {
+                        PlayerList[PlayerNum].LivesLost++;
+                    }
+                    std::cout << CurrentPlayer.Name << " has " << MaxLives-PlayerList[PlayerNum].LivesLost << " lives remaining" << std::endl;
+                }
+                else
+                {
+                    std::cout << CurrentPlayer.Name << " was eliminated!" << std::endl;
+                }
+                PlayerNum++;
+            }
+            break;
+
+        case 2:
+            std::cout << "Please enter the max number of lives: ";
+            std::cin >> MaxLives;
+            std::cout << "Each player now starts with " << MaxLives << " lives!" << std::endl;
+            break;
+
+        case 3:
+            std::cout << "Please name the new player: ";
+            std::cin >> NewPlayer.Name;
+            PlayerList.push_back(NewPlayer);
+            std::cout << NewPlayer.Name << " was added to the game. There are now " << PlayerList.size() << " player(s)!" << std::endl;
+            break;
+
+        case 4:
+            std::cout << "There are " << PlayerList.size() << " players in total:" << std::endl;
+            for (Player CurrentPlayer : PlayerList)
+            {
+                if (MaxLives > CurrentPlayer.LivesLost)
+                {
+                    std::cout << CurrentPlayer.Name << " has " << MaxLives-CurrentPlayer.LivesLost << " lives remaining" << std::endl;
+                }
+                else
+                {
+                    std::cout << CurrentPlayer.Name << " was eliminated!" << std::endl;
+                }
+            }
             break;
 
         default:
+            std::cout << "Something went wrong, please try again!" << std::endl;
             break;
         }
     std::cout << std::endl;
