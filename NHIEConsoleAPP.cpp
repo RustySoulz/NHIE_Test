@@ -31,7 +31,7 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
     int PlayerNum;
     std::vector<Player> PlayerList;
 
-    std::cout << "****** NEVER HAVE I EVER v0.1 by RustySoul ******" << std::endl;
+    std::cout << "****** NAUGHTY HAVE I EVER v1.0 by RustySoul ******" << std::endl;
     std::cout << std::endl;
 
     bool Exit = false;
@@ -45,6 +45,7 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
         std::cout << "2. Set Lives" << std::endl;
         std::cout << "3. Add Player" << std::endl;
         std::cout << "4. Player List" << std::endl;
+        std::cout << "5. Rules (Coming soon)" << std::endl;
         std::cout << "0. Exit Game" << std::endl;
 
         int Input0;
