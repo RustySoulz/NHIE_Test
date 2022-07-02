@@ -4,20 +4,55 @@
 #include <vector>
 #include <ctime>
 
-void InitConsoleApp(std::string FileName);
+void InitMainConsoleApp(std::string FileName);
+void InitVanillaConsoleApp(std::string FileName);
 std::vector<std::string> FileToVector(std::string FileName);
 std::string RandomStringFromVector(std::vector<std::string> VectorName);
 
 int main()  //Use main method to test or initiate other methods, do not write any code in here that you want to keep!
 {
-    InitConsoleApp("./questions.txt");
+    InitMainConsoleApp("./questions.txt");
 
     return 0;
 }
 
 //Put methods here: (Please write a brief description of what they are supposed to do and any headers they require)
 
-void InitConsoleApp(std::string FileName)   //Starts the console application. ()[]
+void InitMainConsoleApp(std::string FileName) //Starts the main menu of the console application. ()[]
+{
+    std::cout << "****** NAUGHTY HAVE I EVER v1.0 by RustySoul ******" << std::endl;
+    std::cout << std::endl;
+        for (;;)
+        {
+            std::cout << "Please select an option using 0-9 on the keyboard:" << std::endl;
+
+            std::cout << "1. Play in Vanilla Mode" << std::endl;
+            std::cout << "2. Play in Naughty Mode 18+ (Coming soon)" << std::endl;
+            std::cout << "0. Exit Game" << std::endl;
+
+            int Input2;
+            std::cin >> Input2;
+            std::cout << std::endl;
+
+            switch (Input2)
+            {
+            case 0:
+                return;
+                break;
+            
+            case 1:
+                InitVanillaConsoleApp(FileName);
+                break;
+            
+            default:
+                std::cout << "Something went wrong, please try again!" << std::endl;
+                break;
+            }
+        }
+
+}
+
+void InitVanillaConsoleApp(std::string FileName)   //Starts the vanilla version of the console application. ()[]
 {
     struct Player
     {
@@ -31,11 +66,7 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
     int PlayerNum;
     std::vector<Player> PlayerList;
 
-    std::cout << "****** NAUGHTY HAVE I EVER v1.0 by RustySoul ******" << std::endl;
-    std::cout << std::endl;
-
-    bool Exit = false;
-    while (!Exit)
+    while (true)
     {
         std::vector<std::string> QuestionList = FileToVector(FileName);
     
@@ -46,7 +77,7 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
         std::cout << "3. Add Player" << std::endl;
         std::cout << "4. Player List" << std::endl;
         std::cout << "5. Rules (Coming soon)" << std::endl;
-        std::cout << "0. Exit Game" << std::endl;
+        std::cout << "0. Exit To Main Menu" << std::endl;
 
         int Input0;
         std::cin >> Input0;
@@ -55,7 +86,7 @@ void InitConsoleApp(std::string FileName)   //Starts the console application. ()
         switch (Input0)
         {
         case 0:
-            Exit = true;
+            return;
             break;
 
         case 1:
